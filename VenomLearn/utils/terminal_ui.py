@@ -58,11 +58,19 @@ class TerminalUI:
         """Get code input from the user."""
         self.console.print("\n[bold]Enter your code below (type 'done' on a new line when finished):[/bold]")
         lines = []
-        while True:
-            line = Prompt.ask("> ")
-            if line.strip().lower() == "done":
-                break
-            lines.append(line)
+        try:
+            while True:
+                try:
+                    line = Prompt.ask("> ")
+                except (KeyboardInterrupt, EOFError):
+                    self.display_error("Input cancelled by user. Returning to previous menu or exiting.")
+                    return None
+                if line.strip().lower() == "done":
+                    break
+                lines.append(line)
+        except (KeyboardInterrupt, EOFError):
+            self.display_error("Input cancelled by user. Returning to previous menu or exiting.")
+            return None
         return "\n".join(lines)
     
     def display_progress(self, completed, total):
