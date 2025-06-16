@@ -43,6 +43,10 @@ def select_difficulty():
         ]
     ).ask()
     
+    if difficulty is None:
+        ui.display_error("Difficulty selection was cancelled. Exiting program.")
+        exit(0)
+    
     if "Beginner" in difficulty:
         return "beginner"
     elif "Intermediate" in difficulty:
