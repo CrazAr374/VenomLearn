@@ -63,6 +63,9 @@ greet_with_time("Charlie")  # Output: Good day, Charlie!
         user_code = ui.get_code_input()
         
         # Check if the code contains the required function
+        if user_code is None:
+            ui.display_info("No code entered. Returning to previous menu or exiting.")
+            return False
         if "def calculate_area" in user_code and "return" in user_code:
             try:
                 # Test the function with some test cases
@@ -146,6 +149,9 @@ print(increment())  # Output: 2
         user_code = ui.get_code_input()
         
         # Check if the code contains the required function
+        if user_code is None:
+            ui.display_info("No code entered. Returning to previous menu or exiting.")
+            return False
         if "def analyze_number" in user_code and "return" in user_code:
             try:
                 # Execute the code to define the function
